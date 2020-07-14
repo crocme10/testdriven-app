@@ -1,0 +1,13 @@
+version: '3.8'
+
+services:
+
+  users:
+    container_name: users
+    build:
+      context: ./services/users
+      dockerfile: docker/Dockerfile-dev
+    ports:
+      - 8081
+    environment:
+      - RUN_MODE=development
