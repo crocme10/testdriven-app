@@ -8,7 +8,7 @@ services:
       context: ./services/users
       dockerfile: docker/Dockerfile-dev
     ports:
-      - 8081
+      - 8081:8081
     environment:
       - RUN_MODE=development
       - DATABASE_URL=postgres://postgres:postgres@users-db:5432/users_dev
