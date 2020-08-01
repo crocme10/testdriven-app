@@ -23,11 +23,12 @@ build:
   script:
     - docker-compose -f docker-compose-prod.yml down
     - docker-compose -f docker-compose-prod.yml build
-    - docker-compose -f docker-compose-prod.yml up
+    - docker-compose -f docker-compose-prod.yml up -d
 
 test:
   stage: test
   script:
+    - docker-compose -f docker-compose-prod.yml run users ./service init
     - docker-compose -f docker-compose-prod.yml run users ./service test
   after_script:
     - docker-compose -f docker-compose-prod.yml stop
