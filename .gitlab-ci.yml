@@ -5,10 +5,10 @@ variables:
 
 # Official docker compose image.
 image:
-  name: docker:19.03.0
+  name: docker/compose
 
 services:
-  - docker:19.03.0-dind
+  - docker:dind
 
 stages:
   - build
