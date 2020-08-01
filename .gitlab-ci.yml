@@ -1,6 +1,6 @@
 variables:
   DOCKER_DRIVER: overlay2
-  DOCKER_HOST: "tcp://docker:2375"
+  DOCKER_HOST: "tcp://gitlab.brunn.dev:2375"
 
 # Official docker compose image.
 image:
