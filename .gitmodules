@@ -1,3 +1,6 @@
 [submodule "services/users"]
 	path = services/users
 	url = ../users.git
+[submodule "services/client"]
+	path = services/client
+	url = git@github.com:riendegris/client.git
