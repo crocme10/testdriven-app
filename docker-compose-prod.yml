@@ -6,12 +6,12 @@ services:
     container_name: users
     build:
       context: ./services/users
-      dockerfile: docker/Dockerfile-dev
+      dockerfile: docker/Dockerfile-prod
     ports:
       - 5000:5000
     environment:
-      - RUN_MODE=development
-      - DATABASE_URL=postgres://postgres:postgres@users-db:5432/users_dev
+      - RUN_MODE=production
+      - DATABASE_URL=postgres://postgres:postgres@users-db:5432/users_prod
       - DATABASE_TEST_URL=postgres://postgres:postgres@users-db:5432/users_test
     depends_on:
       - users-db
@@ -24,18 +24,32 @@ services:
       context: ./services/users/db
       dockerfile: Dockerfile
     ports:
-      - 5435:5432
+      - 5432:5432
     environment:
       - POSTGRES_USER=postgres
       - POSTGRES_PASSWORD=postgres
+
+  client:
+    container_name: client
+    build:
+      context: ./services/client
+      dockerfile: docker/Dockerfile-prod
+    ports:
+      - 8080:8080
+    depends_on:
+      - users
+    links:
+      - users
+
 
   nginx:
     container_name: nginx
     build:
       context: ./services/nginx
-      dockerfile: Dockerfile
+      dockerfile: docker/Dockerfile-prod
     restart: always
     ports:
       - 80:80
     depends_on:
       - users
+      - client
